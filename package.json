@@ -1,0 +1,26 @@
+{
+  "name": "cis197-finalproject",
+  "version": "1.0.0",
+  "description": "Final project for CIS197: Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "yeet": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrew-cui/cis197-finalproject.git"
+  },
+  "author": "Andrew Cui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andrew-cui/cis197-finalproject/issues"
+  },
+  "homepage": "https://github.com/andrew-cui/cis197-finalproject#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0"
+  }
+}

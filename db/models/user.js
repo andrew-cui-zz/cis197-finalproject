@@ -1,17 +1,11 @@
-const S = require('sequelize')
+const mongoose = require('mongoose')
 
-// Exports is schema
-module.exports = {
-  firstname : {
-    type: S.STRING
-  },
-  lastname : {
-    type: S.STRING
-  },
-  username : {
-    type: S.STRING
-  },
-  password : {
-    type: S.STRING
-  }
-}
+const userSchema = new mongoose.Schema({
+  username: { type: String },
+  password: { type: String }
+})
+
+// country: { type: String },,
+  // creationTime: { type: Timestamp } 
+
+module.exports = mongoose.model('user', userSchema)

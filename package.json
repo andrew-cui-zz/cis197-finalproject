@@ -20,6 +20,7 @@
   "homepage": "https://github.com/andrew-cui/cis197-finalproject#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "bulma": "^0.8.0",
     "cookie-session": "^1.3.3",
     "express": "^4.17.1",
     "mongoose": "^5.7.11",

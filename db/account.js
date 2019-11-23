@@ -1,5 +1,6 @@
 // api for database
 const user = require('./models/user.js')
+const accountFunctions = require('./models/functions/accountFunctions.js')
 
 // const functions = require('./functions/functionname')
 var addUser = function (username, password, callback) {
@@ -26,6 +27,26 @@ var addUser = function (username, password, callback) {
   })
 }
 
+var loginUser = function (username, password, callback) {
+  const u = new user({
+    username: username,
+    password: password
+  })
+  user.find({username: username}, (err, result) => {
+    if (!err) {
+      // no error - user exists - invariant that usernames are distinct
+      if (result[0].password == password) {
+        // correct password
+        callback(username, null)
+      } else {
+        callback(null, 'Incorrect password')
+      }
+    } else {
+      callback(null, err)
+    }
+  })
+}
+
 var getAllUsers = function (callback) {
   user.find({}, (err, users) => {
     if (!err) {
@@ -38,9 +59,10 @@ var getAllUsers = function (callback) {
   })
 }
 
-
 module.exports = {
   // each type of functions
   addUser: addUser,
-  getAllUsers: getAllUsers
+  loginUser: loginUser,
+  getAllUsers: getAllUsers,
+  checkValidLogin: accountFunctions.checkValidLogin
 }

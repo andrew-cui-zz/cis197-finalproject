@@ -1,0 +1,11 @@
+.navbar {
+  background-color: #0b1c2b;
+  padding: 0 2.5%;
+}
+a.navbar-item {
+  color: white;
+}
+.navbar-item a.button {
+  height: 2em;
+  font-weight: 400;
+}

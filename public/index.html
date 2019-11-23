@@ -3,16 +3,58 @@
   <head>
     <meta charset="utf-8" />
     <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="logo/delta.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
       content="CIS 197 Final Project"
     />
-    <link rel="stylesheet" href="/app.css">
-    <title>CIS 197 Project</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="/css/app.css">
+    <title>TravelBook | CIS 197</title>
   </head>
   <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/"">
+          <b>TravelBook</b>
+        </a>
+    
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">
+            Discover
+          </a>
+          <a class="navbar-item">
+            Random
+          </a>
+        </div>
+        <div class="navbar-end">
+          <a class="navbar-item">
+            My Account
+          </a>
+          <div class="navbar-item">
+            <div class="buttons">
+              <a class="button is-light">
+                <strong>Sign up</strong>
+              </a>
+              <a class="button is-primary">
+                Log in
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
     <script src="/bundle.js"></script>
   </body>
 </html>

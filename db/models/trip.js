@@ -11,7 +11,7 @@ const tripSchema = new mongoose.Schema({
       day: { type: Number },
       summary: { type: String },
       visits: { type: [{
-        time: { type: TimeRanges },
+        time: { type: Number },
         site: { type: String }
       }]} 
     }]
@@ -19,8 +19,5 @@ const tripSchema = new mongoose.Schema({
   keywords: { type: [String] },
   author: { type: String }
 })
-
-// country: { type: String },,
-  // creationTime: { type: Timestamp } 
 
 module.exports = mongoose.model('trip', tripSchema)

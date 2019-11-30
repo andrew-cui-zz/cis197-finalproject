@@ -1,0 +1,54 @@
+{
+	"name": "iceland",
+	"img": "http://s25227.pcdn.co/wp-content/uploads/sites/2/2016/09/northern-lights-jokulsarlon-glacier-lagoon-in-iceland-image-copyrights-Moyan-Brenn-1.jpg",
+	"itinerary": [
+		{
+			"summary": "Reykjavik",
+			"visits": [
+				{
+					"time": 9,
+					"site": "airport"
+				},
+				{
+					"time": 11,
+					"site": "shopping"
+				},
+				{
+					"time": 16,
+					"site": "church"
+				}
+			]
+		},
+		{
+			"summary": "Jokulsarlon",
+			"visits": [
+				{
+					"time": 10,
+					"site": "vik"
+				},
+				{
+					"time": 12,
+					"site": "glacial park"
+				},
+				{
+					"time": 15,
+					"site": "ice lagoon"
+				},
+				{
+					"time": 12,
+					"site": "crashed glider"
+				}
+			]
+    },
+    {
+			"summary": "Snaefellsnes",
+			"visits": [
+				{
+					"time": 19,
+					"site": "northern lights"
+				}
+			]
+		}
+	],
+	"keywords": ["iceland", "winter", "nature", "glacier"]
+}

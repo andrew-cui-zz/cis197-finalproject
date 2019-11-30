@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server.js",
-    "yeet": "nodemon src/server.js"
+    "watch": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",
@@ -21,9 +21,12 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "bulma": "^0.8.0",
+    "connect-flash": "^0.1.1",
     "cookie-session": "^1.3.3",
+    "ejs": "^3.0.1",
     "express": "^4.17.1",
     "mongoose": "^5.7.11",
+    "path": "^0.12.7",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   }

@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
 
 // each trip has a name, length, keywords, and author
-// each itinerary has a list of days
-// each day has the day #, day summary name, and visits = [time: location]
+// each itinerary has a list of days (ordered)
+// each day has the day summary name, and visits = [time: location]
 const tripSchema = new mongoose.Schema({
+  tripID: { type: Number },
   name: { type: String },
   length: { type: Number }, 
   itinerary: { 
     type: [{
-      day: { type: Number },
       summary: { type: String },
       visits: { type: [{
         time: { type: Number },

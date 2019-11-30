@@ -12,10 +12,12 @@ module.exports = (db) => {
       db.addUser(username, password, (data, err) => {
         // if no error, render the user added
         if (!err) {
-          res.json(data)
+          req.session.user = username // set username
+          res.json(req.session.user)
         } else {
-          // find some way to render the data
-          res.send('SIGNUP ERROR: ' + err)
+          req.flash('message', err)
+          res.redirect('/signup')
+          // res.send('SIGNUP ERROR: ' + err)
         }
       })
     }
@@ -28,6 +30,8 @@ module.exports = (db) => {
       res.send('LOGIN ERROR: ' + req.session.user + ' is already logged in!')
     } else {
       const { username, password } = req.body
+      console.log(username)
+      console.log(password)
       db.loginUser(username, password, (data, err) => {
         // if no error, render the user added
         if (!err) {
@@ -35,21 +39,24 @@ module.exports = (db) => {
           req.session.user = data
           res.json(req.session.user)
         } else {
-          // find some way to render the data
-          res.send('LOGIN ERROR: ' + err)
+          req.flash('message', err)
+          res.redirect('/login')
+          // res.send('LOGIN ERROR: ' + err)
         }
       })
     }
   })
 
   // remove current user
-  router.post('/logout', (req, res) => {
+  // should be post but using get for testing
+  router.get('/logout', (req, res) => {
     // do not allow logout if there is no user logged in
     if (!req.session.user) {
       res.send('LOGOUT ERROR: Nobody is logged in!')
     } else {
+      const prevUser = req.session.user
       req.session.user = null
-      res.send('Logged out: ' + req.session.user)
+      res.send('Logged out: ' + prevUser)
     }
   })
 
@@ -64,6 +71,11 @@ module.exports = (db) => {
         res.send('LOGIN ERROR: ' + err)
       }
     })
+  })
+
+  // access all of a user's trips
+  router.get('/trips', (req, res) => {
+    
   })
 
   return router

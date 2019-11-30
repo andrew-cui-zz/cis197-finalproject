@@ -35,7 +35,11 @@ var loginUser = function (username, password, callback) {
   user.find({username: username}, (err, result) => {
     if (!err) {
       // no error - user exists - invariant that usernames are distinct
-      if (result[0].password == password) {
+      console.log(result)
+      if (result.length == 0) {
+        // user not found
+        callback(null, 'Invalid username')
+      } else if (result[0].password == password) {
         // correct password
         callback(username, null)
       } else {

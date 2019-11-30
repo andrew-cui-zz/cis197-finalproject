@@ -2,7 +2,11 @@ const router = require('express').Router()
 
 module.exports = (path) => {
   router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '../../public/views', 'index.html'))
+    req.flash('user', req.session.user)
+    res.render('index.ejs', {
+      user: req.flash('user')
+    })
+    // res.sendFile(path.join(__dirname, '..', '../../public/views', 'index.html'))
   })
 
   router.get('/login', (req, res) => {
@@ -19,7 +23,11 @@ module.exports = (path) => {
 
   // if none of the previous routes work, return index.html
   router.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', '../../public/views', 'index.html'))
+    req.flash('user', req.session.user)
+    res.render('index.ejs', {
+      user: req.flash('user')
+    })
+    // res.sendFile(path.join(__dirname, '..', '../../public/views', 'index.html'))
   })
   
   return router

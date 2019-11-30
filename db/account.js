@@ -17,7 +17,7 @@ var addUser = function (username, password, callback) {
       u.save((err) => {
         if (!err) {
           // save data and return to the apirouter
-          callback(u, null)
+          callback(username, null)
         } else {
           // return the error
           callback(null, err)
@@ -35,7 +35,6 @@ var loginUser = function (username, password, callback) {
   user.find({username: username}, (err, result) => {
     if (!err) {
       // no error - user exists - invariant that usernames are distinct
-      console.log(result)
       if (result.length == 0) {
         // user not found
         callback(null, 'Invalid username')

@@ -41,16 +41,28 @@
         </div>
         <div class="navbar-end">
           <a class="navbar-item">
-            My Account
+            <!-- display user name if logged in -->
+            <% if (user && (user.length > 0)) { %>
+              <%= user[0] %>
+            <% } else { %>
+              My Account
+            <% } %>
           </a>
           <div class="navbar-item">
             <div class="buttons">
-              <a class="button is-light" href="/signup">
-                <strong>Sign up</strong>
-              </a>
-              <a class="button is-primary" href="/login">
-                Log in
-              </a>
+              <!-- display sign up / log in unless we already have a user -->
+              <% if (user && (user.length > 0)) { %>
+                <a class="button is-primary" href="/account/logout">
+                  Log out
+                </a>
+              <% } else { %>
+                <a class="button is-light" href="/signup">
+                  Sign up
+                </a>
+                <a class="button is-primary" href="/login">
+                  Log in
+                </a>
+              <% } %>
             </div>
           </div>
         </div>

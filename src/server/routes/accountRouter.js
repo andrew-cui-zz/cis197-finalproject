@@ -12,8 +12,9 @@ module.exports = (db) => {
       db.addUser(username, password, (data, err) => {
         // if no error, render the user added
         if (!err) {
-          req.session.user = username // set username
-          res.json(req.session.user)
+          // set user and redirect to homepage
+          req.session.user = data
+          res.redirect('/')
         } else {
           req.flash('message', err)
           res.redirect('/signup')
@@ -33,9 +34,10 @@ module.exports = (db) => {
       db.loginUser(username, password, (data, err) => {
         // if no error, render the user added
         if (!err) {
-          // set user
+          // set user and redirect to homepage
           req.session.user = data
-          res.json(req.session.user)
+          res.redirect('/')
+          // res.json(req.session.user)
         } else {
           req.flash('message', err)
           res.redirect('/login')
@@ -52,9 +54,10 @@ module.exports = (db) => {
     if (!req.session.user) {
       res.send('LOGOUT ERROR: Nobody is logged in!')
     } else {
-      const prevUser = req.session.user
+      console.log('Logged out: ' + req.session.user)
       req.session.user = null
-      res.send('Logged out: ' + prevUser)
+      res.redirect('/')
+      // 
     }
   })
 

@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const tripSchema = new mongoose.Schema({
   tripID: { type: Number },
   name: { type: String },
+  img: { type: String },
   length: { type: Number }, 
   itinerary: { 
     type: [{

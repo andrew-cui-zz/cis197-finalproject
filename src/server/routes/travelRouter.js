@@ -15,6 +15,18 @@ module.exports = (db) => {
     })
   })
 
+  // get four random trips
+  router.get('/discover', (req, res) => {
+    db.getDiscover((data, err) => {
+      if (!err) {
+        req.flash('data', data)
+        res.redirect('/')
+      } else {
+        res.send('DB ERROR: ' + err)
+      }
+    })
+  })
+
   // get all trips
   router.get('/all', (req, res) => {
     db.getAllTrips((data, err) => {
@@ -72,6 +84,7 @@ module.exports = (db) => {
         db.addTrip(
           count + 1,
           req.body.name,
+          req.body.img,
           req.body.itinerary.length,
           req.body.itinerary,
           req.body.keywords,

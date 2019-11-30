@@ -3,10 +3,12 @@ const user = require('./models/user.js')
 const trip = require('./models/trip.js')
 
 // add single trip
-var addTrip = function (tripID, name, length, itinerary, keywords, author, callback) {
+var addTrip = function (tripID, name, img, length, itinerary, keywords, author, callback) {
+  // verify img is URL
   const t = new trip({
     tripID: tripID,
     name: name,
+    img: img,
     length: length,
     itinerary: itinerary,
     keywords: keywords,
@@ -39,6 +41,24 @@ var getNumTrips = function (callback) {
 var getAllTrips = function (callback) {
   trip.find({}, function(err, data) {
     if (!err) {
+      callback(data, null)
+    } else {
+      callback(null, err)
+    }
+  })
+}
+
+// get four trips at random
+var getDiscover = function (callback) {
+  getAllTrips((data, err) => {
+    if (!err) {
+      // fill out to size 4
+      while (data.length < 4) {
+        data.push({
+          name: null
+        })
+      }
+      console.log(data)
       callback(data, null)
     } else {
       callback(null, err)
@@ -87,5 +107,6 @@ module.exports = {
   getAllTrips: getAllTrips,
   getTripByID: getTripByID,
   getTripByUser: getTripByUser,
+  getDiscover: getDiscover,
   deleteTrip: deleteTrip
 }

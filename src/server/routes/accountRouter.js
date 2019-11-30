@@ -57,7 +57,6 @@ module.exports = (db) => {
       console.log('Logged out: ' + req.session.user)
       req.session.user = null
       res.redirect('/')
-      // 
     }
   })
 

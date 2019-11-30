@@ -52,14 +52,14 @@
             <div class="buttons">
               <!-- display sign up / log in unless we already have a user -->
               <% if (user && (user.length > 0)) { %>
-                <a class="button is-primary" href="/account/logout">
+                <a class="button is-inverted" href="/account/logout">
                   Log out
                 </a>
               <% } else { %>
-                <a class="button is-light" href="/signup">
+                <a class="button is-light " href="/signup">
                   Sign up
                 </a>
-                <a class="button is-primary" href="/login">
+                <a class="button is-inverted" href="/login">
                   Log in
                 </a>
               <% } %>
@@ -70,7 +70,102 @@
     </nav>
     <!-- main website content -->
     <main>
-      
+      <!-- hero banner -->
+      <section class="banner">
+        <div class="hero is-bold is-medium">
+          <div class="hero-body justify-content-center">
+            <div class="container">
+              <h1 class="title">
+                Hero title
+              </h1>
+              <h2 class="subtitle">
+                Hero subtitle
+              </h2>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- discover currently -->
+      <section class="discover">
+        <div class="columns-header">
+          <h2>Discover</h2>
+          <p>Four of today's top favorites!</p>
+        </div>
+        <div class="columns">
+          <!-- trip 1 -->
+          <div class="column discover-entry">
+            <% if (data && data[0].name) { %>
+              <div class="discover-image" style="background: url(<%=data[0].img%>);">
+                <div class="discover-caption">
+                  <h4><%=data[0].name%></h4>
+                </div>
+              </div>
+            <% } else { %>
+              <!-- blank filler -->
+              <div class="discover-image empty">
+                <div class="discover-caption">
+                  <h4>none</h4>
+                </div>
+              </div>
+            <% } %>
+          </div>
+          <!-- trip 2 -->
+          <div class="column discover-entry">
+            <% if (data && data[1].name) { %>
+              <div class="discover-image" style="background: url(<%=data[1].img%>);">
+                <div class="discover-caption">
+                  <h4><%=data[1].name%></h4>
+                </div>
+              </div>
+            <% } else { %>
+              <!-- blank filler -->
+              <div class="discover-image empty"></i>
+                <div class="discover-caption">
+                  <h4>none</h4>
+                </div>
+              </div>
+            <% } %>
+          </div>
+          <!-- trip 3 -->
+          <div class="column discover-entry">
+            <% if (data && data[2].name) { %>
+              <div class="discover-image" style="background: url(<%=data[2].img%>);">
+                <div class="discover-caption">
+                  <h4><%=data[2].name%></h4>
+                </div>
+              </div>
+            <% } else { %>
+              <!-- blank filler -->
+              <div class="discover-image empty"></i>
+                <div class="discover-caption">
+                  <h4>none</h4>
+                </div>
+              </div>
+            <% } %>
+          </div>
+          <!-- trip 4 -->
+          <div class="column discover-entry">
+            <% if (data && data[3].name) { %>
+            <div class="discover-image" style="background: url(<%=data[3].img%>);">
+                <div class="discover-caption">
+                  <h4><%=data[3].name%></h4>
+                </div>
+              </div>
+            <% } else { %>
+              <!-- blank filler -->
+              <div class="discover-image empty"></i>
+                <div class="discover-caption">
+                  <h4>none</h4>
+                </div>
+              </div>
+            <% } %>
+          </div>
+        </div>
+      </section>
+      <!--  new section -->
+      <section>
+
+      </section>
     </main>
     <script src="/bundle.js"></script>
   </body>

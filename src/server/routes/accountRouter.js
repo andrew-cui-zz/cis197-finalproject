@@ -30,8 +30,6 @@ module.exports = (db) => {
       res.send('LOGIN ERROR: ' + req.session.user + ' is already logged in!')
     } else {
       const { username, password } = req.body
-      console.log(username)
-      console.log(password)
       db.loginUser(username, password, (data, err) => {
         // if no error, render the user added
         if (!err) {

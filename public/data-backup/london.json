@@ -1,0 +1,21 @@
+{
+	"location": "london",
+	"img": "https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+	"places": [
+    {
+      "name": "Victoria & Albert Museum",
+      "category": "museum",
+      "price": "$",
+      "interested": [],
+      "visited": []
+		},
+		{
+      "name": "Nando's",
+      "category": "food/drink",
+      "price": "$",
+      "interested": [],
+      "visited": []
+    }
+	],
+	"keywords": ["london", "uk", "stpauls", "bigben"]
+}

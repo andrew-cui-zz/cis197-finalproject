@@ -27,6 +27,23 @@ module.exports = (db) => {
     })
   })
 
+  // get singular random trips
+  router.get('/random', (req, res) => {
+    db.getRandomID((tripID, err) => {
+      if (!err) {
+        db.getTripByID(tripID, (data, err) => {
+          if (!err) { 
+            res.json(data)
+          } else {
+            res.send('DB ERROR: ' + err)
+          }
+        })
+      } else {
+        res.send('DB ERROR: ' + err)
+      }
+    })
+  })
+
   // get all trips
   router.get('/all', (req, res) => {
     db.getAllTrips((data, err) => {

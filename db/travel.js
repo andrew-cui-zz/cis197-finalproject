@@ -92,8 +92,23 @@ var getDiscover = function (callback) {
         })
       }
       // need to do random
-      console.log(data)
-      callback(data, null)
+      const shuffled = [...data].sort(() => 0.5 - Math.random());
+      callback(shuffled.slice(0, 4), null)
+    } else {
+      callback(null, err)
+    }
+  })
+}
+
+// get singular random tripID
+var getRandomID = function (callback) {
+  let ID = []
+  getAllTrips((data, err) => {
+    if (!err) {
+      for (var i = 0; i < data.length; i++) {
+        ID.push(data[i].tripID)
+      }
+      callback(ID[Math.floor(Math.random()*ID.length)], null)
     } else {
       callback(null, err)
     }
@@ -141,6 +156,7 @@ module.exports = {
   getNumTrips: getNumTrips,
   getAllTrips: getAllTrips,
   getTripByID: getTripByID,
+  getRandomID: getRandomID,
   getTripByUser: getTripByUser,
   getDiscover: getDiscover,
   deleteTrip: deleteTrip

@@ -36,7 +36,7 @@
           <a class="navbar-item">
             Discover
           </a>
-          <a class="navbar-item">
+          <a class="navbar-item" href="/trip/random" target="_blank">
             Random
           </a>
         </div>
@@ -57,7 +57,7 @@
                   Log out
                 </a>
               <% } else { %>
-                <a class="button is-light " href="/signup">
+                <a class="button is-light" href="/signup">
                   Sign up
                 </a>
                 <a class="button is-inverted" href="/login">
@@ -95,11 +95,11 @@
         <div class="columns">
           <!-- trip 1 -->
           <div class="column discover-entry">
-            <% if (data && data[0].name) { %>
+            <% if (data && data[0].location) { %>
               <a href="<%='trip/get/' + data[0].tripID%>" target="_blank">
                 <div class="discover-image" style="background: url(<%=data[0].img%>);">
                   <div class="discover-caption">
-                    <h4><%=data[0].name%></h4>
+                    <h4><%=data[0].location%></h4>
                   </div>
                 </div>
               </a>
@@ -114,11 +114,11 @@
           </div>
           <!-- trip 2 -->
           <div class="column discover-entry">
-            <% if (data && data[1].name) { %>
+            <% if (data && data[1].location) { %>
               <a href="<%='trip/get/' + data[1].tripID%>" target="_blank">
                 <div class="discover-image" style="background: url(<%=data[1].img%>);">
                   <div class="discover-caption">
-                    <h4><%=data[1].name%></h4>
+                    <h4><%=data[1].location%></h4>
                   </div>
                 </div>
               </a>
@@ -133,11 +133,11 @@
           </div>
           <!-- trip 3 -->
           <div class="column discover-entry">
-            <% if (data && data[2].name) { %>
+            <% if (data && data[2].location) { %>
               <a href="<%='trip/get/' + data[2].tripID%>" target="_blank">
                 <div class="discover-image" style="background: url(<%=data[2].img%>);">
                   <div class="discover-caption">
-                    <h4><%=data[2].name%></h4>
+                    <h4><%=data[2].location%></h4>
                   </div>
                 </div>
               </a>
@@ -152,11 +152,11 @@
           </div>
           <!-- trip 4 -->
           <div class="column discover-entry">
-            <% if (data && data[3].name) { %>
+            <% if (data && data[3].location) { %>
               <a href="<%='trip/get/' + data[3].tripID%>" target="_blank">
                 <div class="discover-image" style="background: url(<%=data[3].img%>);">
                   <div class="discover-caption">
-                    <h4><%=data[3].name%></h4>
+                    <h4><%=data[3].location%></h4>
                   </div>
                 </div>
               </a>

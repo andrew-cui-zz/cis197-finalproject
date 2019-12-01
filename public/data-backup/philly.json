@@ -1,0 +1,21 @@
+{
+	"location": "philadelphia",
+	"img": "https://assets.visitphilly.com/wp-content/uploads/2019/01/Loews-Skyline-C-Smyth-2200x1237.jpg",
+	"places": [
+    {
+      "name": "Lincoln Financial Field",
+      "category": "sports",
+      "price": "$$",
+      "interested": [],
+      "visited": []
+		},
+		{
+      "name": "Liberty Bell",
+      "category": "museum",
+      "price": "$",
+      "interested": [],
+      "visited": []
+    }
+	],
+	"keywords": ["philadelphia", "usa", "city", "philly"]
+}

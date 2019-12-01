@@ -1,0 +1,28 @@
+{
+	"location": "new york",
+	"img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu80XNIndNBdoUloaQHSIqHCb1zTC8SE2_y0AnlBa4EY0FaUg5OQ&s",
+	"places": [
+    {
+      "name": "Eleven Madison Park",
+      "category": "food/drink",
+      "price": "$$$$",
+      "interested": [],
+      "visited": []
+    },
+    {
+      "name": "Death & Co",
+      "category": "food/drink",
+      "price": "$$$",
+      "interested": [],
+      "visited": []
+		},
+		{
+      "name": "Yankee Stadium",
+      "category": "sports",
+      "price": "$$",
+      "interested": [],
+      "visited": []
+    }
+	],
+	"keywords": ["new york", "usa", "city", "nyc", "bigapple"]
+}

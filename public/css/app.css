@@ -57,8 +57,10 @@
 .discover-caption h4 {
   position: relative;
   background-color: none;
-  top: 120px;
+  top: 60px;
   color: white;
+  text-transform: uppercase;
+  font-size: 18pt;
   font-weight: bold;
   text-align: center;
 }

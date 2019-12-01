@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const tripDB = require('./../../../db/travelplan.js')
+const tripDB = require('../../../db/travel.js')
 
 module.exports = (path) => {
   router.get('/', (req, res) => {

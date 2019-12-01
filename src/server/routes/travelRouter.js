@@ -83,10 +83,9 @@ module.exports = (db) => {
         // add to trip using req.body JSON + next ID
         db.addTrip(
           count + 1,
-          req.body.name,
+          req.body.location,
           req.body.img,
-          req.body.itinerary.length,
-          req.body.itinerary,
+          req.body.places,
           req.body.keywords,
           req.session.user,
           (data, err) => {
@@ -98,6 +97,18 @@ module.exports = (db) => {
             }
           }
         )
+      } else {
+        res.send('DB ERROR: ' + err)
+      }
+    })
+  })
+
+  // add site to existing location
+  router.post('/addPlace', (req, res) => {
+    const { tripID, name, category, price } = req.body
+    db.addPlace(tripID, name, category, price, (data, err) => {
+      if (!err) {
+        res.json(data)
       } else {
         res.send('DB ERROR: ' + err)
       }

@@ -1,33 +1,14 @@
 {
-	"name": "barcelona",
-	"img": "https://www.airpano.com/files/barcelona_02_big.jpg",
-	"itinerary": [
-		{
-			"summary": "Barca City",
-			"visits": [
-				{
-					"time": 12,
-					"site": "tapas"
-				},
-				{
-					"time": 16,
-					"site": "campnou"
-				}
-			]
-		},
-		{
-			"summary": "Guell",
-			"visits": [
-				{
-					"time": 9,
-					"site": "Park Guell"
-				},
-				{
-					"time": 14,
-					"site": "casa"
-				}
-			]
-		}
-	],
+	"location": "barcelona",
+  "img": "https://www.airpano.com/files/barcelona_02_big.jpg",
+  "places": [
+    {
+      "name": "Camp Nou",
+      "category": "sports",
+      "price": "$$",
+      "interested": [],
+      "visited": []
+    }
+  ],
 	"keywords": ["spain", "barca", "football"]
 }

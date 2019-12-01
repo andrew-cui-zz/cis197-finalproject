@@ -8,7 +8,7 @@ const cookieSession = require('cookie-session')
 // importing db and api
 require('../db/dbconnect.js') // connect to mongodb
 const acctDB = require('../db/account.js') // account routers
-const tripDB = require('../db/travelplan.js') // account routers
+const tripDB = require('../db/travel.js') // account routers
 
 // session and bodyparser
 const port = process.env.PORT || 197

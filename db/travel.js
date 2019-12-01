@@ -3,16 +3,16 @@ const user = require('./models/user.js')
 const trip = require('./models/trip.js')
 
 // add single trip
-var addTrip = function (tripID, name, img, length, itinerary, keywords, author, callback) {
+var addTrip = function (tripID, location, img, places, keywords, creator, callback) {
   // verify img is URL
   const t = new trip({
     tripID: tripID,
-    name: name,
+    location: location,
     img: img,
-    length: length,
-    itinerary: itinerary,
+    ratings: [],
+    places: places,
     keywords: keywords,
-    author: author
+    creator: creator
   })
 
   t.save((err) => {
@@ -22,6 +22,39 @@ var addTrip = function (tripID, name, img, length, itinerary, keywords, author, 
     } else {
       // return the error
       callback(null, err)
+    }
+  })
+}
+
+// add data to existing trip
+var addPlace = function (id, placeName, placeCategory, placePrice, callback) {
+  trip.findOne({'tripID': id}, function(err, t) {
+    if (t) {
+      if (!t.places) {
+        // first location
+        t.places = []
+      }
+      // add to locations
+      t.places.push({
+        "name": placeName,
+        "category": placeCategory,
+        "price": placePrice,
+        "interested": [],
+        "visited": []
+      })
+      console.log(t.places)
+      t.save((err) => {
+        if (!err) {
+          // save data and return to the travelrouter
+          callback(t, null)
+        } else {
+          // return the error
+          callback(null, err)
+        }
+      })
+    } else {
+      // did not find the trip
+      callback(null, 'Invalid trip')
     }
   })
 }
@@ -58,6 +91,7 @@ var getDiscover = function (callback) {
           name: null
         })
       }
+      // need to do random
       console.log(data)
       callback(data, null)
     } else {
@@ -80,7 +114,7 @@ var getTripByID = function (id, callback) {
 // get trip by userID - goal is to abstract this
 var getTripByUser = function (user, callback) {
   console.log(user)
-  trip.find({'author': user}, function(err, data) {
+  trip.find({'creator': user}, function(err, data) {
     if (!err) {
       callback(data, null)
     } else {
@@ -91,9 +125,9 @@ var getTripByUser = function (user, callback) {
 
 // delete trip by tripID
 var deleteTrip = function (tripID, callback) {
-  trip.find({'tripID': tripID}).remove((err) => {
+  trip.deleteOne({'tripID': tripID}, (err) => {
     if (!err) {
-      callback('Removed trip!', null)
+      callback('Removed location!', null)
     } else {
       callback(null, err)
     }
@@ -103,6 +137,7 @@ var deleteTrip = function (tripID, callback) {
 module.exports = {
   // each type of functions
   addTrip: addTrip,
+  addPlace: addPlace,
   getNumTrips: getNumTrips,
   getAllTrips: getAllTrips,
   getTripByID: getTripByID,

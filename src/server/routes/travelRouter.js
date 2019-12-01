@@ -139,5 +139,15 @@ module.exports = (db) => {
     })
   })
 
+  // update user preferences
+  router.post('/update/:tripID/:userID', (req, res) => {
+    const { tripID, userID } = req.params
+
+    // update user's likes to include all of the locations
+    // update count for the location
+    // match on _id?
+    console.log(tripID)
+  })
+
   return router
 }

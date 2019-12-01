@@ -91,9 +91,42 @@
         </div>
       </section>
       
-      <!--  new section -->
+      <!--  new section: how to add data -->
       <section>
-
+        <form action="<%='/trip/update/'+data[0].tripID+'/'+user%>" method="post" onSubmit="">
+          <table class="places">
+            <tr>
+              <td class="table-title">Name</td>
+              <td class="table-title">Category</td>
+              <td class="table-title">Price</td>
+              <td class="table-title">Interested</td>
+              <td class="table-title">Visited</td>
+            </tr>
+            <%if (data) { %>
+              <% data[0].places.forEach(i => { %>
+              <tr>
+                <td class="table-entry"><%=i.name%></td>
+                <td class="table-entry"><%=i.category%></td>
+                <td class="table-entry"><%=i.price%></td>
+                <td class="table-entry"><%=i.interested.length%>
+                  <label class="checkbox">
+                    <input type="checkbox" name="<%='interested,' + i._id%>">
+                  </label>
+                </td>
+                <td class="table-entry"><%=i.visited.length%>
+                  <label class="checkbox">
+                    <input type="checkbox" name="<%='visited,' + i._id%>">
+                  </label>
+                </td>
+              </tr>
+           <% })} %>
+          </table>
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-link">Update preferences</button>
+            </div>
+          </div>
+        </form>
       </section>
     </main>
     <footer class="footer">

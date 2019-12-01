@@ -7,7 +7,7 @@
   background-position: 60% 45%;
 }
 .banner .hero {
-  background-color:rgba(255,255,255,.2);
+  background-color:rgba(55,55,55,.2);
   height: 100%;
 }
 .banner > .hero .hero-body {
@@ -51,7 +51,7 @@
 }
 .discover-caption {
   position: relative;
-  background-color: rgba(255,255,255,.25);
+  background-color: rgba(55,55,55,.1);
   height: 100%;
 }
 .discover-caption h4 {
@@ -68,6 +68,25 @@
 .hero-body .title, 
 .hero-body .subtitle {
   color: white;
+}
+.places {
+  padding: 2.5rem;
+  margin: 2.5rem auto;
+}
+.places tr {
+  padding: 1.5rem 0;
+  /* border-bottom: 1px solid black; */
+  line-height: 1.5;
+}
+.places td {
+  min-width: 50px;
+  width: 15vw; /* 95% since 2.5% on either side for boundaries earlier */
+  /* padding-right: 50px; */
+}
+.table-title {
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  padding-bottom: 5px;
 }
 
 .form-wrapper {

@@ -62,7 +62,14 @@ module.exports = (db) => {
     // const tripID = req.body.id
     db.getTripByID(tripID, (data, err) => {
       if (!err) { 
-        res.json(data)
+        req.flash('data', data)
+        req.flash('user', req.session.user)
+
+        // don't redirect since we want users to be able to refresh
+        res.render('trip.ejs', {
+          user: req.flash('user'),
+          data: req.flash('data')
+        })
       } else {
         res.send('DB ERROR: ' + err)
       }

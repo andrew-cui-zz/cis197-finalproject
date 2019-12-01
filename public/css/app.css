@@ -22,7 +22,7 @@
 }
 .columns-header {
   margin-top: 1rem;
-  padding: 0 .75rem;
+  padding: 0rem;
 }
 .discover p {
   font-style: italic;
@@ -32,7 +32,7 @@
   margin-bottom: 1.5rem;
 }
 .discover-entry {
-  padding: 1rem 1.5rem;
+  padding: 1rem .75rem;
 }
 .empty > .discover-caption > h4 {
   font-weight: 300;

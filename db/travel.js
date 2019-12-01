@@ -117,7 +117,7 @@ var getRandomID = function (callback) {
 
 // get trip by tripID
 var getTripByID = function (id, callback) {
-  trip.find({'tripID': id}, function(err, data) {
+  trip.findOne({'tripID': id}, function(err, data) {
     if (!err) {
       callback(data, null)
     } else {

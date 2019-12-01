@@ -31,8 +31,12 @@ module.exports = (path) => {
     })
   })
 
-  router.get('/account', (req, res) => {
-    res.send('hi')
+  router.get('/view', (req, res) => {
+    req.flash('user', req.session.user)
+    res.render('trip.ejs', {
+      user: req.flash('user'),
+      data: req.flash('data')
+    })
   })
 
   // if none of the previous routes work, return index.html

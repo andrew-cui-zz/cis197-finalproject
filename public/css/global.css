@@ -21,6 +21,12 @@ p {
 }
 a.navbar-item {
   color: white;
+  transition: .25s ease;
+}
+a.navbar-item:focus {
+  color: white;
+  background-color: transparent;
+  transition: .25s ease;
 }
 a.navbar-item:hover {
   color: white;

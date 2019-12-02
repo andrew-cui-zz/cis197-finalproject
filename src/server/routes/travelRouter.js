@@ -10,7 +10,8 @@ module.exports = (db) => {
       if (!err) {
         res.send('Current # of trips: ' + data)
       } else {
-        res.send('DB ERROR: ' + err)
+        req.flash('message', 'Error: ' + err) 
+        res.redirect('/')
       }
     })
   })
@@ -22,7 +23,8 @@ module.exports = (db) => {
         req.flash('data', data)
         res.redirect('/')
       } else {
-        res.send('DB ERROR: ' + err)
+        req.flash('message', 'Error: ' + err) 
+        res.redirect('/')
       }
     })
   })
@@ -35,11 +37,13 @@ module.exports = (db) => {
           if (!err) { 
             res.redirect('/trip/get/' + tripID)
           } else {
-            res.send('DB ERROR: ' + err)
+            req.flash('message', 'Error: ' + err) 
+            res.redirect('/')
           }
         })
       } else {
-        res.send('DB ERROR: ' + err)
+        req.flash('message', 'Error: ' + err) 
+        res.redirect('/')
       }
     })
   })
@@ -50,7 +54,8 @@ module.exports = (db) => {
       if (!err) {
         res.json(data)
       } else {
-        res.send('DB ERROR: ' + err)
+        req.flash('message', 'Error: ' + err) 
+        res.redirect('/')
       }
     })
   })
@@ -64,6 +69,7 @@ module.exports = (db) => {
       if (!err) { 
         if (!req.session.user || req.session.user.length === 0) {
           // need an error msg
+          req.flash('message', 'Please log in first!')
           res.redirect('/')
         } else {
           req.flash('data', data)
@@ -72,11 +78,13 @@ module.exports = (db) => {
           // don't redirect since we want users to be able to refresh
           res.render('trip.ejs', {
             user: req.flash('user'),
-            data: req.flash('data')
+            data: req.flash('data'),
+            message: req.flash('message')
           })
         }
       } else {
-        res.send('DB ERROR: ' + err)
+        req.flash('message', 'Error: ' + err) 
+        res.redirect('/')
       }
     })
   })
@@ -153,12 +161,12 @@ module.exports = (db) => {
 
     // these are the user's selections - update trip[tripID].places.interested, visited
     db.updatePlaces(tripID, userID, req.body, (data, err) => {
-      res.json(data)
+      if (err) {
+        req.flash('message', 'Error: ' + err)
+      }
+      // redirect and refresh
+      res.redirect('/trip/get/' + tripID)
     })
-
-    // update user's likes to include all of the locations
-    // update count for the location
-    // match on _id?
   })
 
   return router

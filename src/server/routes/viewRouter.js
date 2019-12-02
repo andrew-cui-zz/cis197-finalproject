@@ -10,10 +10,18 @@ module.exports = (path) => {
         req.flash('data', data)
         res.render('index.ejs', {
           user: req.flash('user'),
-          data: req.flash('data')
+          data: req.flash('data'),
+          message: req.flash('message')
         })
       } else {
         // error handling
+        req.flash('data', [])
+        req.flash('message', err)
+        res.render('index.ejs', {
+          user: req.flash('user'),
+          data: req.flash('data'),
+          message: req.flash('message')
+        })
       }
     })
     // res.sendFile(path.join(__dirname, '..', '../../public/views', 'index.html'))
@@ -35,6 +43,7 @@ module.exports = (path) => {
     // don't let a non-logged in user view
     if (!req.session.user || req.session.user.length === 0) {
       // need an error msg
+      req.flash('message', 'Please log in first!')
       res.redirect('/')
     } else {
       req.flash('user', req.session.user)
@@ -47,20 +56,7 @@ module.exports = (path) => {
 
   // if none of the previous routes work, return index.html
   router.get('*', (req, res) => {
-    // req.flash('user', req.session.user)
     res.redirect('/')
-    // tripDB.getDiscover((data, err) => {
-    //   if (!err) {
-    //     req.flash('data', data)
-    //     res.render('index.ejs', {
-    //       user: req.flash('user'),
-    //       data: req.flash('data')
-    //     })
-    //   } else {
-    //     // error handling
-    //   }
-    // })
-    // res.sendFile(path.join(__dirname, '..', '../../public/views', 'index.html'))
   })
   
   return router

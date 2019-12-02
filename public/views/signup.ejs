@@ -33,11 +33,11 @@
     
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item">
-            Discover
-          </a>
-          <a class="navbar-item" href="/trip/random" target="_blank">
+          <a class="navbar-item" href="/trip/random">
             Random
+          </a>
+          <a class="navbar-item">
+            Create
           </a>
         </div>
         <div class="navbar-end">
@@ -71,7 +71,9 @@
             </div>
           </div> -->
           <% if (message && (message.length > 0)) { %>
-            <p class="help is-danger"><%=message%></p>
+            <div class="notification is-danger">
+              <%=message%>
+            </div>
           <% } %>
 
           <div class="field">

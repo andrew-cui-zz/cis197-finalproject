@@ -33,11 +33,11 @@
     
       <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-          <a class="navbar-item">
-            Discover
-          </a>
-          <a class="navbar-item" href="/trip/random" target="_blank">
+          <a class="navbar-item" href="/trip/random">
             Random
+          </a>
+          <a class="navbar-item">
+            Create
           </a>
         </div>
         <div class="navbar-end">
@@ -93,6 +93,11 @@
       
       <!--  new section: how to add data -->
       <section>
+        <% if (message && (message.length > 0)) { %>
+          <div class="notification is-danger">
+            <%=message%>
+          </div>
+        <% } %>
         <form action="<%='/trip/update/'+data[0].tripID+'/'+user%>" method="post" onSubmit="">
           <table class="places">
             <tr>

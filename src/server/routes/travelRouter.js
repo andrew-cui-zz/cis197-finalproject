@@ -62,14 +62,19 @@ module.exports = (db) => {
     // const tripID = req.body.id
     db.getTripByID(tripID, (data, err) => {
       if (!err) { 
-        req.flash('data', data)
-        req.flash('user', req.session.user)
+        if (!req.session.user || req.session.user.length === 0) {
+          // need an error msg
+          res.redirect('/')
+        } else {
+          req.flash('data', data)
+          req.flash('user', req.session.user)
 
-        // don't redirect since we want users to be able to refresh
-        res.render('trip.ejs', {
-          user: req.flash('user'),
-          data: req.flash('data')
-        })
+          // don't redirect since we want users to be able to refresh
+          res.render('trip.ejs', {
+            user: req.flash('user'),
+            data: req.flash('data')
+          })
+        }
       } else {
         res.send('DB ERROR: ' + err)
       }
@@ -139,14 +144,21 @@ module.exports = (db) => {
     })
   })
 
+  
   // update user preferences
   router.post('/update/:tripID/:userID', (req, res) => {
+    // tripID is for this trip
+    // userID is current user (req.session.user)
     const { tripID, userID } = req.params
+
+    // these are the user's selections - update trip[tripID].places.interested, visited
+    db.updatePlaces(tripID, userID, req.body, (data, err) => {
+      res.json(data)
+    })
 
     // update user's likes to include all of the locations
     // update count for the location
     // match on _id?
-    console.log(tripID)
   })
 
   return router

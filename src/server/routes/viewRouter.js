@@ -32,27 +32,34 @@ module.exports = (path) => {
   })
 
   router.get('/view', (req, res) => {
-    req.flash('user', req.session.user)
-    res.render('trip.ejs', {
-      user: req.flash('user'),
-      data: req.flash('data')
-    })
+    // don't let a non-logged in user view
+    if (!req.session.user || req.session.user.length === 0) {
+      // need an error msg
+      res.redirect('/')
+    } else {
+      req.flash('user', req.session.user)
+      res.render('trip.ejs', {
+        user: req.flash('user'),
+        data: req.flash('data')
+      })
+    }
   })
 
   // if none of the previous routes work, return index.html
   router.get('*', (req, res) => {
-    req.flash('user', req.session.user)
-    tripDB.getDiscover((data, err) => {
-      if (!err) {
-        req.flash('data', data)
-        res.render('index.ejs', {
-          user: req.flash('user'),
-          data: req.flash('data')
-        })
-      } else {
-        // error handling
-      }
-    })
+    // req.flash('user', req.session.user)
+    res.redirect('/')
+    // tripDB.getDiscover((data, err) => {
+    //   if (!err) {
+    //     req.flash('data', data)
+    //     res.render('index.ejs', {
+    //       user: req.flash('user'),
+    //       data: req.flash('data')
+    //     })
+    //   } else {
+    //     // error handling
+    //   }
+    // })
     // res.sendFile(path.join(__dirname, '..', '../../public/views', 'index.html'))
   })
   

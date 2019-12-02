@@ -102,24 +102,27 @@
               <td class="table-title">Interested</td>
               <td class="table-title">Visited</td>
             </tr>
-            <%if (data) { %>
-              <% data[0].places.forEach(i => { %>
+            <% if (data) { %>
+              <% for (var i = 0; i < data[0].places.length; i++) { %>
+              <% var val = data[0].places[i]; %>
               <tr>
-                <td class="table-entry"><%=i.name%></td>
-                <td class="table-entry"><%=i.category%></td>
-                <td class="table-entry"><%=i.price%></td>
-                <td class="table-entry"><%=i.interested.length%>
+                <td class="table-entry"><%=val.name%></td>
+                <td class="table-entry"><%=val.category%></td>
+                <td class="table-entry"><%=val.price%></td>
+                <td class="table-entry"><%=val.interested.length%>
                   <label class="checkbox">
-                    <input type="checkbox" name="<%='interested,' + i._id%>">
+                    <input type="hidden" name="<%='interested[' + i + ']'%>" value="_">
+                    <input type="checkbox" name="<%='interested[' + i + ']'%>">
                   </label>
                 </td>
-                <td class="table-entry"><%=i.visited.length%>
+                <td class="table-entry"><%=val.visited.length%>
                   <label class="checkbox">
-                    <input type="checkbox" name="<%='visited,' + i._id%>">
+                    <input type="hidden" name="<%='visited[' + i + ']'%>" value="_">
+                    <input type="checkbox" name="<%='visited[' + i + ']'%>">
                   </label>
                 </td>
               </tr>
-           <% })} %>
+           <% }} %>
           </table>
           <div class="field is-grouped">
             <div class="control">

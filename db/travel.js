@@ -1,6 +1,12 @@
 // api for database
 const user = require('./models/user.js')
 const trip = require('./models/trip.js')
+const travelFunctions = require('./models/functions/travelFunctions.js')
+
+// router for checkbox functions
+var computeTripResults = function (body) {
+  return(travelFunctions.computeCheckboxes(body))
+}
 
 // add single trip
 var addTrip = function (tripID, location, img, places, keywords, creator, callback) {
@@ -138,6 +144,51 @@ var getTripByUser = function (user, callback) {
   })
 }
 
+// update the results of a user input
+var updatePlaces = function (tripID, userID, body, callback) {
+  const { interested, visited } = computeTripResults(body)
+
+  let updateInterested = new Set()
+  let updateVisited = new Set()
+  
+  getTripByID(tripID, (t, err) => {
+    if (!err) {
+      // update each of the places
+      // ideally we have these as sets from the start
+      for (let i = 0; i < t.places.length; i++) {  
+        updateInterested = new Set(t.places[i].interested)
+        updateVisited = new Set(t.places[i].visited)
+        
+        if (interested[i]) {
+          updateInterested.add(userID)
+        } else {
+          updateInterested.delete(userID)
+        }
+
+        if (visited[i]) {
+          updateVisited.add(userID)
+        } else {
+          updateVisited.delete(userID)
+        }
+
+        t.places[i].interested = Array.from(updateInterested)
+        t.places[i].visited = Array.from(updateVisited)
+      }
+
+      // save the trip variable
+      t.save((err) => {
+        if (!err) {
+          callback(t, null)
+        } else {
+          callback(null, err)
+        }
+      })
+    } else {
+      callback(null, err)
+    }
+  })
+}
+
 // delete trip by tripID
 var deleteTrip = function (tripID, callback) {
   trip.deleteOne({'tripID': tripID}, (err) => {
@@ -159,5 +210,7 @@ module.exports = {
   getRandomID: getRandomID,
   getTripByUser: getTripByUser,
   getDiscover: getDiscover,
-  deleteTrip: deleteTrip
+  deleteTrip: deleteTrip,
+  computeTripResults: computeTripResults, 
+  updatePlaces: updatePlaces
 }

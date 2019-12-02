@@ -33,7 +33,7 @@ module.exports = (db) => {
       if (!err) {
         db.getTripByID(tripID, (data, err) => {
           if (!err) { 
-            res.json(data)
+            res.redirect('/trip/get/' + tripID)
           } else {
             res.send('DB ERROR: ' + err)
           }

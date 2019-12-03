@@ -81,13 +81,13 @@ module.exports = (db) => {
           if (!err) { 
             res.redirect('/trip/get/' + tripID)
           } else {
-            req.flash('message', 'Error: ' + err) 
+            req.flash('message', 'Error: Insufficient data') 
             req.flash('validate', null)
             res.redirect('/')
           }
         })
       } else {
-        req.flash('message', 'Error: ' + err) 
+        req.flash('message', 'Error: Insufficient data') 
         req.flash('validate', null)
         res.redirect('/')
       }
@@ -119,7 +119,7 @@ module.exports = (db) => {
           })
         }
       } else {
-        req.flash('message', 'Error: ' + err) 
+        req.flash('message', 'Error: Insufficient data') 
         req.flash('validate', null)
         res.redirect('/')
       }
@@ -271,8 +271,9 @@ module.exports = (db) => {
       db.getAllTrips((data, err) => {
         if (!err) {
           req.flash('user', req.session.user)
+          console.log(data.length)
           if (data.length === 0) {
-            req.flash('data', [])
+            req.flash('data', null)
           } else {
             req.flash('data', data)
           }

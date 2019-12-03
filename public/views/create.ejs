@@ -80,17 +80,17 @@
           <div class="hero-body justify-content-center">
             <div class="container">
               <h1 class="title">
-                TravelBook
+                CREATE
               </h1>
               <h3 class="subtitle">
-                Social method of finding your next vacation
+                Create a new location here!
               </h3>
             </div>
           </div>
         </div>
       </section>
       <!-- discover currently -->
-      <section class="discover">
+      <section class="discover" style="margin-bottom: 2rem;">
         <% if (message && (message.length > 0)) { %>
           <div class="notification is-danger">
             <%=message%>
@@ -100,93 +100,23 @@
             <%=validate%>
           </div>
         <% } %>
-        <div class="columns-header">
-          <h2>DISCOVER</h2>
-          <p>four locations from around the world</p>
-        </div>
-        <div class="columns">
-          <!-- trip 1 -->
-          <div class="column discover-entry">
-            <% if (data && data[0].location) { %>
-              <a href="<%='trip/get/' + data[0].tripID%>">
-                <div class="discover-image is-16by9" style="background: url(<%=data[0].img%>);">
-                  <div class="discover-caption">
-                    <h4><%=data[0].location%></h4>
-                  </div>
-                </div>
-              </a>
-            <% } else { %>
-              <!-- blank filler -->
-              <div class="discover-image empty">
-                <div class="discover-caption">
-                  <h4>none</h4>
-                </div>
-              </div>
-            <% } %>
-          </div>
-          <!-- trip 2 -->
-          <div class="column discover-entry">
-            <% if (data && data[1].location) { %>
-              <a href="<%='trip/get/' + data[1].tripID%>">
-                <div class="discover-image" style="background: url(<%=data[1].img%>);">
-                  <div class="discover-caption">
-                    <h4><%=data[1].location%></h4>
-                  </div>
-                </div>
-              </a>
-            <% } else { %>
-              <!-- blank filler -->
-              <div class="discover-image empty"></i>
-                <div class="discover-caption">
-                  <h4>none</h4>
-                </div>
-              </div>
-            <% } %>
-          </div>
-          <!-- trip 3 -->
-          <div class="column discover-entry">
-            <% if (data && data[2].location) { %>
-              <a href="<%='trip/get/' + data[2].tripID%>">
-                <div class="discover-image" style="background: url(<%=data[2].img%>);">
-                  <div class="discover-caption">
-                    <h4><%=data[2].location%></h4>
-                  </div>
-                </div>
-              </a>
-            <% } else { %>
-              <!-- blank filler -->
-              <div class="discover-image empty"></i>
-                <div class="discover-caption">
-                  <h4>none</h4>
-                </div>
-              </div>
-            <% } %>
-          </div>
-          <!-- trip 4 -->
-          <div class="column discover-entry">
-            <% if (data && data[3].location) { %>
-              <a href="<%='trip/get/' + data[3].tripID%>">
-                <div class="discover-image" style="background: url(<%=data[3].img%>);">
-                  <div class="discover-caption">
-                    <h4><%=data[3].location%></h4>
-                  </div>
-                </div>
-              </a>
-            <% } else { %>
-              <!-- blank filler -->
-              <div class="discover-image empty"></i>
-                <div class="discover-caption">
-                  <h4>none</h4>
-                </div>
-              </div>
-            <% } %>
+      </section>
+      <!-- add data -->
+      <h3 class="subtitle">ADD BELOW</h3>
+      <form action="<%='/trip/create/'%>" method="post" onSubmit="">
+        <table class="places">
+          <tr>
+            <td class="table-entry"><input class="input" type="text" placeholder="Location" name="location"></td>
+            <td class="table-entry"><input class="input" type="text" placeholder="Image URL" name="img"></td>
+            <td class="table-entry"><input class="input" type="text" placeholder="Keywords" name="keywordList"></td>
+          </tr>
+        </table>
+        <div class="field is-grouped">
+          <div class="control" style="margin: 0 auto; margin-bottom: 2.5rem;">
+            <button class="button is-link">Add location</button>
           </div>
         </div>
-      </section>
-      <!--  new section -->
-      <section>
-
-      </section>
+      </form>
     </main>
     <footer class="footer">
       <div class="content columns">

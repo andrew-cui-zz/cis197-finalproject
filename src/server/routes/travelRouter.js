@@ -230,11 +230,12 @@ module.exports = (db) => {
       if (!err) {
         req.flash('message', null)
         req.flash('validate', 'Added ' + name)
+        res.redirect('/trip/get/' + tripID)
       } else {
         req.flash('message', 'Error: unable to add place!')
         req.flash('validate', null)
+        res.redirect('/trip/get/' + tripID)
       }
-      res.redirect('/trip/get/' + tripID)
     })
   })
 
@@ -250,12 +251,12 @@ module.exports = (db) => {
       if (err) {
         req.flash('message', 'Error: ' + err)
         req.flash('validate', null)
+        res.redirect('/trip/get/' + tripID)
       } else {
         req.flash('message', null)
-        req.flash('validate', 'Updated your information!')        
+        req.flash('validate', 'Updated your information!')
+        res.redirect('/trip/get/' + tripID)        
       }
-      // redirect and refresh
-      res.redirect('/trip/get/' + tripID)
     })
   })
 

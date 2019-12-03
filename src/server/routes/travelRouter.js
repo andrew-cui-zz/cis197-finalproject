@@ -271,7 +271,11 @@ module.exports = (db) => {
       db.getAllTrips((data, err) => {
         if (!err) {
           req.flash('user', req.session.user)
-          req.flash('data', data)
+          if (data.length === 0) {
+            req.flash('data', [])
+          } else {
+            req.flash('data', data)
+          }
           res.render('list.ejs', {
             user: req.flash('user'),
             data: req.flash('data'),

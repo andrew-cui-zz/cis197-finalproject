@@ -83,11 +83,18 @@
           <div class="hero-body justify-content-center">
             <div class="container">
               <h1 class="title">
-                TravelBook
+                SEARCH
               </h1>
               <h3 class="subtitle">
-                Social method of finding your next vacation
+                Search for information among any of the following parameters:
               </h3>
+              <div class="tags" style="margin: 0 auto; padding: 0rem;">
+                <span class="keyword tag is-link is-medium is-light is-font-3" style="margin: 0 auto; ">location</span>
+                <span class="keyword tag is-link is-medium is-light is-font-3" style="margin: 0 auto; ">keywords</span>
+                <span class="keyword tag is-link is-medium is-light is-font-3" style="margin: 0 auto; ">place categories</span>
+                <span class="keyword tag is-link is-medium is-light is-font-3" style="margin: 0 auto; ">place names</span>
+                <span class="keyword tag is-link is-medium is-light is-font-3" style="margin: 0 auto; ">users</span>
+              </div>
             </div>
           </div>
         </div>
@@ -98,24 +105,39 @@
           <div class="notification is-danger">
             <%=message%>
           </div>
-        <% } else if (validate && (validate.length > 0)) { %>
-          <div class="notification is-success">
-            <%=validate%>
-          </div>
         <% } %>
         <div class="columns-header">
-          <h2>DISCOVER</h2>
-          <p>four locations from around the world</p>
-          <a href="/"><button class="button is-link" style="margin-bottom: 1rem;">Refresh discover&nbsp;&nbsp;<i class="fas fa-sync"></i></button></a>
+          <h2>SEARCH RESULTS</h2>
+          <% if (data && (data.length > 0)) { %>
+          <p>Your search for <%=query%> returned <%=data.length%> results! (Note that user search returns "interested" or "visited")</p>
+          <% } else { %>
+            <p>Your search for <%=query%> returned 0 results! (Note that user search returns "interested" or "visited")</p>
+          <% } %>
         </div>
-        <div class="columns">
+        
+        <form action="<%='/trip/search'%>" method="post" onSubmit="">
+          <div class="field has-addons">
+              <div class="control search-control">
+                  <input class="input search-input" type="text" placeholder="Enter search here..." name="searchQuery">
+              </div>
+              <div class="control">
+                <a class="button is-info search-button">
+                  Search&nbsp;&nbsp;<i class="fas fa-search"></i>
+                </a>
+              </div>
+            </div>
+        </form>
+
+        <% if (data && (data.length > 0)) { %>
+        <div class="d-flex entries">
           <!-- trip 1 -->
-          <div class="column discover-entry">
-            <% if (data && data[0].location) { %>
-              <a href="<%='trip/get/' + data[0].tripID%>">
-                <div class="discover-image is-16by9" style="background: url(<%=data[0].img%>);">
+          <% for (var i = 0; i < data.length; i++) { %>
+          <div class="entry-data discover-entry">
+            <% if (data[i].location) { %>
+              <a href="<%='trip/get/' + data[i].tripID%>">
+                <div class="discover-image is-16by9" style="background: url(<%=data[i].img%>);">
                   <div class="discover-caption">
-                    <h4><%=data[0].location%></h4>
+                    <h4><%=data[i].location%></h4>
                   </div>
                 </div>
               </a>
@@ -128,64 +150,9 @@
               </div>
             <% } %>
           </div>
-          <!-- trip 2 -->
-          <div class="column discover-entry">
-            <% if (data && data[1].location) { %>
-              <a href="<%='trip/get/' + data[1].tripID%>">
-                <div class="discover-image" style="background: url(<%=data[1].img%>);">
-                  <div class="discover-caption">
-                    <h4><%=data[1].location%></h4>
-                  </div>
-                </div>
-              </a>
-            <% } else { %>
-              <!-- blank filler -->
-              <div class="discover-image empty"></i>
-                <div class="discover-caption">
-                  <h4>none</h4>
-                </div>
-              </div>
-            <% } %>
-          </div>
-          <!-- trip 3 -->
-          <div class="column discover-entry">
-            <% if (data && data[2].location) { %>
-              <a href="<%='trip/get/' + data[2].tripID%>">
-                <div class="discover-image" style="background: url(<%=data[2].img%>);">
-                  <div class="discover-caption">
-                    <h4><%=data[2].location%></h4>
-                  </div>
-                </div>
-              </a>
-            <% } else { %>
-              <!-- blank filler -->
-              <div class="discover-image empty"></i>
-                <div class="discover-caption">
-                  <h4>none</h4>
-                </div>
-              </div>
-            <% } %>
-          </div>
-          <!-- trip 4 -->
-          <div class="column discover-entry">
-            <% if (data && data[3].location) { %>
-              <a href="<%='trip/get/' + data[3].tripID%>">
-                <div class="discover-image" style="background: url(<%=data[3].img%>);">
-                  <div class="discover-caption">
-                    <h4><%=data[3].location%></h4>
-                  </div>
-                </div>
-              </a>
-            <% } else { %>
-              <!-- blank filler -->
-              <div class="discover-image empty"></i>
-                <div class="discover-caption">
-                  <h4>none</h4>
-                </div>
-              </div>
-            <% } %>
-          </div>
+          <% } %>
         </div>
+        <% } %>
       </section>
       <!--  new section -->
       <section>

@@ -30,47 +30,50 @@
           <span aria-hidden="true"></span>
         </a>
       </div>
-    
+      
       <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item" href="/trip/all">
-            View All
-          </a>
-          <a class="navbar-item" href="/trip/random">
-            Random
-          </a>
-          <a class="navbar-item" href="/create">
-            Create
-          </a>
-        </div>
-        <div class="navbar-end">
-          <a class="navbar-item">
-            <!-- display user name if logged in -->
-            <% if (user && (user.length > 0)) { %>
-              <%= user[0] %>
-            <% } else { %>
-              My Account
-            <% } %>
-          </a>
-          <div class="navbar-item">
-            <div class="buttons">
-              <!-- display sign up / log in unless we already have a user -->
+          <div class="navbar-start">
+            <a class="navbar-item" href="/trip/all">
+              View All&nbsp;&nbsp;<i class="fas fa-globe-americas"></i>
+            </a>
+            <a class="navbar-item" href="/trip/random">
+              Random&nbsp;&nbsp;<i class="fas fa-random"></i>
+            </a>
+            <a class="navbar-item" href="/create">
+              Create&nbsp;&nbsp;<i class="fas fa-plus-circle"></i>
+            </a>
+                        <a class="navbar-item" href="/search">
+              Search&nbsp;&nbsp;<i class="fas fa-search"></i>
+            </a>
+          </div>
+          <div class="navbar-end">
+            <a class="navbar-item">
+              <!-- display user name if logged in -->
               <% if (user && (user.length > 0)) { %>
-                <a class="button is-inverted" href="/account/logout">
-                  Log out
-                </a>
+                <%= user[0]%>&nbsp;&nbsp;<i class="fas fa-user-check"></i>
               <% } else { %>
-                <a class="button is-light" href="/signup">
-                  Sign up
-                </a>
-                <a class="button is-inverted" href="/login">
-                  Log in
-                </a>
+                My Account
               <% } %>
+            </a>
+            <div class="navbar-item">
+              <div class="buttons">
+                <!-- display sign up / log in unless we already have a user -->
+                <% if (user && (user.length > 0)) { %>
+                  <a class="button is-inverted" href="/account/logout">
+                    Log out&nbsp;&nbsp;<i class="fas fa-sign-out-alt"></i>
+                  </a>
+                <% } else { %>
+                  <a class="button is-light" href="/signup">
+                    Sign up&nbsp;&nbsp;<i class="fas fa-user-shield"></i>
+                  </a>
+                  <a class="button is-inverted" href="/login">
+                    Log in&nbsp;&nbsp;<i class="fas fa-key"></i>
+                  </a>
+                <% } %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
     </nav>
     <!-- main website content -->
     <main>
@@ -157,13 +160,13 @@
                 <td class="table-entry"><%=val.name%></td>
                 <td class="table-entry"><%=val.category%></td>
                 <td class="table-entry"><%=val.price%></td>
-                <td class="table-entry"><%=val.interested.length%>&nbsp;&nbsp;&nbsp;
+                <td class="table-entry"><div class="tooltip"><%=val.interested.length%><span class="tooltiptext"><u>Interested</u>: <%=val.interested%></span></div>&nbsp;&nbsp;&nbsp;
                   <label class="checkbox">
                     <input type="hidden" name="<%='interested[' + i + ']'%>" value="_">
                     <input type="checkbox" name="<%='interested[' + i + ']'%>">
                   </label>
                 </td>
-                <td class="table-entry"><%=val.visited.length%>&nbsp;&nbsp;&nbsp;
+                <td class="table-entry"><div class="tooltip"><%=val.visited.length%><span class="tooltiptext"><u>Visited</u>: <%=val.visited%></span>&nbsp;&nbsp;&nbsp;
                   <label class="checkbox">
                     <input type="hidden" name="<%='visited[' + i + ']'%>" value="_">
                     <input type="checkbox" name="<%='visited[' + i + ']'%>">

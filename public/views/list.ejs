@@ -113,7 +113,7 @@
           <% for (var i = 0; i < data.length; i++) { %>
           <div class="entry-data discover-entry">
             <% if (data[i].location) { %>
-              <a href="<%='trip/get/' + data[i].tripID%>">
+              <a href="/trip/get/<%=data[i].tripID%>">
                 <div class="discover-image is-16by9" style="background: url(<%=data[i].img%>);">
                   <div class="discover-caption">
                     <h4><%=data[i].location%></h4>

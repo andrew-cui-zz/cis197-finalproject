@@ -157,7 +157,7 @@ module.exports = (db) => {
   router.post('/delete', (req, res) => {
     const tripID = req.body.tripID
     db.deleteTrip(tripID, (message, err) => {
-      if (!err) { 
+      if (!err) {
         res.send(message)
       } else {
         res.send('DB ERROR: ' + err)

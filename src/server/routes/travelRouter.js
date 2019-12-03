@@ -85,7 +85,8 @@ module.exports = (db) => {
           res.render('trip.ejs', {
             user: req.flash('user'),
             data: req.flash('data'),
-            message: req.flash('message')
+            message: req.flash('message'),
+            validate: req.flash('validate')
           })
         }
       } else {
@@ -105,6 +106,7 @@ module.exports = (db) => {
         res.redirect('/trip/get/' + tripID)
       } else {
         req.flash('message', 'Error: ' + err) 
+        req.flash('message', null)
         res.redirect('/trip/get/' + tripID)
       }
     })
@@ -162,14 +164,39 @@ module.exports = (db) => {
   })
 
   // add site to existing location
-  router.post('/addPlace', (req, res) => {
-    const { tripID, name, category, price } = req.body
-    db.addPlace(tripID, name, category, price, (data, err) => {
+  router.post('/addPlace/:tripID', (req, res) => {
+    const tripID = req.params.tripID
+    const { name, category, price, interested, visited } = req.body
+    let interestedResult = []
+    let visitedResult = []
+    
+    // error checking for blanks
+    if (!(name && category && price)) {
+      req.flash('message', 'Fields must be non-empty!')
+      req.flash('validate', null)
+      res.redirect('/trip/get/'+tripID)
+    }
+
+    if (interested === 'on') {
+      interestedResult = [req.session.user]
+    } else {
+      interestedResult = []
+    }
+    if (visited === 'on') {
+      visitedResult = [req.session.user]
+    } else {
+      visitedResult = []
+    }
+
+    db.addPlace(tripID, name, category, price, interestedResult, visitedResult, (data, err) => {
       if (!err) {
-        res.json(data)
+        req.flash('message', null)
+        req.flash('validate', 'Added ' + name)
       } else {
-        res.send('DB ERROR: ' + err)
+        req.flash('message', 'Error: unable to add place!')
+        req.flash('validate', null)
       }
+      res.redirect('/trip/get/' + tripID)
     })
   })
 
@@ -184,6 +211,10 @@ module.exports = (db) => {
     db.updatePlaces(tripID, userID, req.body, (data, err) => {
       if (err) {
         req.flash('message', 'Error: ' + err)
+        req.flash('validate', null)
+      } else {
+        req.flash('message', null)
+        req.flash('validate', 'Updated your information!')        
       }
       // redirect and refresh
       res.redirect('/trip/get/' + tripID)

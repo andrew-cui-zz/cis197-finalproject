@@ -33,7 +33,7 @@ var addTrip = function (tripID, location, img, places, keywords, creator, callba
 }
 
 // add data to existing trip
-var addPlace = function (id, placeName, placeCategory, placePrice, callback) {
+var addPlace = function (id, placeName, placeCategory, placePrice, interested, visited, callback) {
   trip.findOne({'tripID': id}, function(err, t) {
     if (t) {
       if (!t.places) {
@@ -45,10 +45,10 @@ var addPlace = function (id, placeName, placeCategory, placePrice, callback) {
         "name": placeName,
         "category": placeCategory,
         "price": placePrice,
-        "interested": [],
-        "visited": []
+        "interested": interested,
+        "visited": visited
       })
-      console.log(t.places)
+
       t.save((err) => {
         if (!err) {
           // save data and return to the travelrouter

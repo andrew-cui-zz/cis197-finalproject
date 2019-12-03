@@ -89,6 +89,9 @@
   padding: 2.5rem;
   margin: 2.5rem auto;
 }
+.places:last-of-type {
+  margin: .5rem auto;
+}
 .table-header {
   background-color: #0b1c2b;
   color: white;

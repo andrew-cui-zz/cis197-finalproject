@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
-    <link rel="icon" href="logo/delta.png" />
+    <link rel="icon" href="/logo/delta.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#000000" />
     <meta
@@ -124,8 +124,14 @@
       <!--  new section: how to add data -->
       <% if (message && (message.length > 0)) { %>
         <section class="discover">
-          <div class="notification is-danger">
+          <div class="notification is-danger" style="margin: auto 3.6rem;">
             <%=message%>
+          </div>
+        </section>
+      <% } else if (validate && (validate.length > 0)) { %>
+        <section class="discover">
+          <div class="notification is-success" style="margin: auto 3.6rem;">
+            <%=validate%>
           </div>
         </section>
       <% } %>
@@ -164,8 +170,55 @@
            <% }} %>
           </table>
           <div class="field is-grouped">
-            <div class="control" style="margin: 0 auto; margin-bottom: 2.5rem;">
+            <div class="control" style="margin: 0 auto; margin-bottom: 1.5rem;">
               <button class="button is-link">Update preferences</button>
+            </div>
+          </div>
+        </form>
+        <br>
+        <form action="<%='/trip/addPlace/'+data[0].tripID+'/'%>" method="post" onSubmit="">
+          <table class="places">
+              <tr>
+                <td class="table-entry"><input class="input" type="text" placeholder="Name" name="name"></td>
+                <td class="table-entry">
+                  <!-- <input class="input" type="text" placeholder="Category" name="category"> -->
+                  <div class="select">
+                    <select name="category">
+                      <option>sports</option>
+                      <option>food/drink</option>
+                      <option>museum</option>
+                      <option>entertainment</option>
+                      <option>nature</option>
+                      <option>landmark</option>
+                    </select>
+                  </div>
+                </td>
+                <td class="table-entry">
+                  <!-- <input class="input" type="text" placeholder="Price" name="price"> -->
+                  <div class="select">
+                    <select name="price">
+                      <option>$</option>
+                      <option>$$</option>
+                      <option>$$$</option>
+                      <option>$$$$</option>
+                    </select>
+                  </div>
+                </td>
+                <td class="table-entry">
+                  <label class="checkbox">
+                    <input type="checkbox" name="interested">
+                  </label>
+                </td>
+                <td class="table-entry">
+                  <label class="checkbox">
+                    <input type="checkbox" name="visited">
+                  </label>
+                </td>
+              </tr>
+          </table>
+          <div class="field is-grouped">
+            <div class="control" style="margin: 0 auto; margin-bottom: 2.5rem;">
+              <button class="button is-link">Add</button>
             </div>
           </div>
         </form>

@@ -83,12 +83,12 @@
           <div class="hero-body justify-content-center">
             <div class="container">
               <h1 class="title">
-                <% if (data && data[0].location) { %>
+                <% if (data && data[0] && data[0].location) { %>
                   <%=data[0].location.toUpperCase()%>
                 <%}%>
               </h1>
               <h3 class="subtitle"  style="margin-bottom: 3rem">
-                <% if (data && data[0].keywords) { %>
+                <% if (data && data[0] && data[0].keywords) { %>
                   <div class="tags">
                   <% data[0].keywords.forEach((k) => { %>
                     <span class="keyword tag is-link is-medium is-light is-font-3"><%=k%></span>

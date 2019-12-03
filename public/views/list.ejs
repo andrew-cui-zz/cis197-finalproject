@@ -107,7 +107,7 @@
           <h2>ALL LOCATIONS</h2>
           <p>all locations in our data</p>
         </div>
-        <% if (data) { %>
+        <% if (data && (data.length > 0)) { %>
         <div class="d-flex entries">
           <!-- trip 1 -->
           <% for (var i = 0; i < data.length; i++) { %>

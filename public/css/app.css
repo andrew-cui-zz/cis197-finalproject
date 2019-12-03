@@ -42,7 +42,7 @@
   position: relative;
   background: rgba(50,50,50,.25);
   width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: cover;
   background-size: cover;
   background-position: 50% 50% !important;
@@ -57,7 +57,7 @@
 .discover-caption h4 {
   position: relative;
   background-color: none;
-  top: 60px;
+  top: 70px;
   color: white;
   text-transform: uppercase;
   font-size: 18pt;
@@ -69,26 +69,81 @@
 .hero-body .subtitle {
   color: white;
 }
+.hero-body .title {
+  margin-bottom: 2.5rem;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+}
+.place-info, .location-info, .error-info {
+  margin-top: 3rem;
+}
+.subtitle {
+  font-size: 1.25rem;
+  font-weight: light;
+  text-align: center;
+}
+.keyword {
+  margin: 0 .4rem;
+}
 .places {
   padding: 2.5rem;
   margin: 2.5rem auto;
+}
+.table-header {
+  background-color: #0b1c2b;
+  color: white;
+  padding-bottom: 2rem;
+}
+table, th, td {
+  text-align: center !important;
 }
 .places tr {
   padding: 1.5rem 0;
   /* border-bottom: 1px solid black; */
   line-height: 1.5;
+  text-align: center;
+  font-size: 10.5pt;
 }
 .places td {
+  padding: .75rem 1.1rem;
   min-width: 50px;
   width: 15vw; /* 95% since 2.5% on either side for boundaries earlier */
   /* padding-right: 50px; */
 }
+.places td:first-of-type {
+  padding-left: .5rem;
+  border-radius: 5px 0 0 5px;
+}
+.places td:last-of-type {
+  padding-right: .5rem;
+  border-radius: 0 5px 5px 0;
+}
 .table-title {
   font-weight: bold;
-  border-bottom: 1px solid black;
-  padding-bottom: 5px;
+  text-transform: uppercase;
+  /* border-bottom: 1px solid black; */
 }
-
+.rating-wrapper {
+  background-color: #eef3fc;
+  color: #0b1c2b;
+  width: 12rem;
+  margin: 0 auto;
+  padding: .5rem .75rem;
+  border-radius: 5px;
+}
+.rating-control.columns {
+  margin: 0 1.5rem;
+  padding: auto 1.75rem;
+}
+.rating-control .column {
+  width: 1rem;
+  padding: 0;
+}
+.submit-rating {
+  position: relative;
+  margin: .5rem auto;
+  margin-bottom: .25rem;
+}
 .form-wrapper {
   margin: 5% auto;
   max-width: 80%;

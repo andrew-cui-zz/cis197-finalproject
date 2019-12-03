@@ -144,6 +144,26 @@ var getTripByUser = function (user, callback) {
   })
 }
 
+// update average in a trip
+var updateAverage = function (tripID, newRating, callback) {
+  getTripByID(tripID, (t, err) => {
+    if (!err) {
+      t.ratings.push(newRating) // update rating
+      console.log(t.ratings)
+
+      t.save((err) => {
+        if (!err) {
+          callback(t, null)
+        } else {
+          callback(null, err)
+        }
+      })
+    } else {
+      callback(t.ratings, err)
+    }
+  })
+}
+
 // update the results of a user input
 var updatePlaces = function (tripID, userID, body, callback) {
   const { interested, visited } = computeTripResults(body)
@@ -212,5 +232,6 @@ module.exports = {
   getDiscover: getDiscover,
   deleteTrip: deleteTrip,
   computeTripResults: computeTripResults, 
-  updatePlaces: updatePlaces
+  updatePlaces: updatePlaces,
+  updateAverage: updateAverage
 }

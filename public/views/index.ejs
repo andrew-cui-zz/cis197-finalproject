@@ -92,6 +92,10 @@
           <div class="notification is-danger">
             <%=message%>
           </div>
+        <% } else if (validate && (validate.length > 0)) { %>
+          <div class="notification is-success">
+            <%=validate%>
+          </div>
         <% } %>
         <div class="columns-header">
           <h2>DISCOVER</h2>
@@ -102,7 +106,7 @@
           <div class="column discover-entry">
             <% if (data && data[0].location) { %>
               <a href="<%='trip/get/' + data[0].tripID%>">
-                <div class="discover-image" style="background: url(<%=data[0].img%>);">
+                <div class="discover-image is-16by9" style="background: url(<%=data[0].img%>);">
                   <div class="discover-caption">
                     <h4><%=data[0].location%></h4>
                   </div>

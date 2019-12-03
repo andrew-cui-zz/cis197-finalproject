@@ -25,10 +25,13 @@ module.exports = (db) => {
   })
 
   // log in for a new account
-  router.post('/login', (req, res) => {
+  router.use('/login', (req, res) => {
     // do not allow login/signup if user already logged in
     if (!db.checkValidLogin(req)) {
-      res.send('LOGIN ERROR: ' + req.session.user + ' is already logged in!')
+      console.log('hi')
+      req.flash('message', 'Error: ' + req.session.user + ' is already logged in!')
+      req.flash('validate', null)
+      res.redirect('/')
     } else {
       const { username, password } = req.body
       db.loginUser(username, password, (data, err) => {
@@ -36,12 +39,12 @@ module.exports = (db) => {
         if (!err) {
           // set user and redirect to homepage
           req.session.user = data
+          req.flash('validate', 'Welcome, ' + req.session.user + '!')
           res.redirect('/')
-          // res.json(req.session.user)
         } else {
           req.flash('message', err)
+          req.flash('validate', null)
           res.redirect('/login')
-          // res.send('LOGIN ERROR: ' + err)
         }
       })
     }
@@ -52,9 +55,11 @@ module.exports = (db) => {
   router.get('/logout', (req, res) => {
     // do not allow logout if there is no user logged in
     if (!req.session.user) {
-      res.send('LOGOUT ERROR: Nobody is logged in!')
+      req.flash('message', 'Error: you are not logged in!')
+      req.flash('validate', null)
+      res.redirect('/')    
     } else {
-      console.log('Logged out: ' + req.session.user)
+      req.flash('validate', 'Logged out ' + req.session.user + '!')
       req.session.user = null
       res.redirect('/')
     }

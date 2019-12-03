@@ -11,16 +11,19 @@ module.exports = (path) => {
         res.render('index.ejs', {
           user: req.flash('user'),
           data: req.flash('data'),
-          message: req.flash('message')
+          message: req.flash('message'),
+          validate: req.flash('validate')
         })
       } else {
         // error handling
         req.flash('data', [])
         req.flash('message', err)
+        req.flash('validate', null)
         res.render('index.ejs', {
           user: req.flash('user'),
           data: req.flash('data'),
-          message: req.flash('message')
+          message: req.flash('message'),
+          validate: req.flash('validate')
         })
       }
     })

@@ -11,6 +11,7 @@ module.exports = (db) => {
         res.send('Current # of trips: ' + data)
       } else {
         req.flash('message', 'Error: ' + err) 
+        req.flash('validate', null)
         res.redirect('/')
       }
     })
@@ -24,6 +25,7 @@ module.exports = (db) => {
         res.redirect('/')
       } else {
         req.flash('message', 'Error: ' + err) 
+        req.flash('validate', null)
         res.redirect('/')
       }
     })
@@ -38,11 +40,13 @@ module.exports = (db) => {
             res.redirect('/trip/get/' + tripID)
           } else {
             req.flash('message', 'Error: ' + err) 
+            req.flash('validate', null)
             res.redirect('/')
           }
         })
       } else {
         req.flash('message', 'Error: ' + err) 
+        req.flash('validate', null)
         res.redirect('/')
       }
     })
@@ -55,6 +59,7 @@ module.exports = (db) => {
         res.json(data)
       } else {
         req.flash('message', 'Error: ' + err) 
+        req.flash('validate', null)
         res.redirect('/')
       }
     })
@@ -70,6 +75,7 @@ module.exports = (db) => {
         if (!req.session.user || req.session.user.length === 0) {
           // need an error msg
           req.flash('message', 'Please log in first!')
+          req.flash('validate', null)
           res.redirect('/')
         } else {
           req.flash('data', data)
@@ -84,7 +90,22 @@ module.exports = (db) => {
         }
       } else {
         req.flash('message', 'Error: ' + err) 
+        req.flash('validate', null)
         res.redirect('/')
+      }
+    })
+  })
+
+  // update current average
+  router.post('/average/:tripID/', (req, res) => {
+    const tripID = req.params.tripID
+    const newRating = Number(req.body.rating)
+    db.updateAverage(tripID, newRating, (data, err) => {
+      if (!err) {
+        res.redirect('/trip/get/' + tripID)
+      } else {
+        req.flash('message', 'Error: ' + err) 
+        res.redirect('/trip/get/' + tripID)
       }
     })
   })

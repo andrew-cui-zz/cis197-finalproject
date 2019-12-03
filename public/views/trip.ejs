@@ -78,29 +78,63 @@
             <div class="container">
               <h1 class="title">
                 <% if (data && data[0].location) { %>
-                  <%=data[0].location%>
+                  <%=data[0].location.toUpperCase()%>
                 <%}%>
               </h1>
-              <h3 class="subtitle">
+              <h3 class="subtitle"  style="margin-bottom: 3rem">
                 <% if (data && data[0].keywords) { %>
-                  <%=data[0].keywords%>
+                  <div class="tags">
+                  <% data[0].keywords.forEach((k) => { %>
+                    <span class="keyword tag is-link is-medium is-light is-font-3"><%=k%></span>
+                  <% })%>
+                  </div>
                 <%}%>
               </h3>
+              <!-- location rating -->
+              <div class="rating-wrapper">
+                <% if (data) { %>
+                  <h4 style="margin-bottom: .25rem; margin-top: .25rem;">Rating (avg: <%=((data[0].ratings.reduce((x, y) => x + y, 0))/Math.max(1, data[0].ratings.length)).toFixed(2)%> ⭐)</h4>
+                <% } %>
+                <form action="<%='/trip/average/'+data[0].tripID+'/'%>" method="post" onSubmit="">
+                  <div class="rating-control columns">
+                    <% for (var i = 1; i < 6; i++) { %>
+                    <div class="column">
+                      <label class="radio">
+                        <input type="radio" name="rating" value="<%=i%>">
+                      </label>
+                      <br>
+                      <%=i%>
+                    </div>
+                  <% } %>
+                  </div>
+                  <div class="rating-control columns">
+                    <div class="field is-grouped submit-rating">
+                      <div class="control">
+                        <button class="button is-link">Send</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </section>
       
       <!--  new section: how to add data -->
-      <section>
-        <% if (message && (message.length > 0)) { %>
+      <% if (message && (message.length > 0)) { %>
+        <section class="discover">
           <div class="notification is-danger">
             <%=message%>
           </div>
-        <% } %>
+        </section>
+      <% } %>
+
+      <section class="place-info">
+        <h3 class="subtitle">PLACES TO SEE</h3>
         <form action="<%='/trip/update/'+data[0].tripID+'/'+user%>" method="post" onSubmit="">
           <table class="places">
-            <tr>
+            <tr class="table-header">
               <td class="table-title">Name</td>
               <td class="table-title">Category</td>
               <td class="table-title">Price</td>
@@ -114,13 +148,13 @@
                 <td class="table-entry"><%=val.name%></td>
                 <td class="table-entry"><%=val.category%></td>
                 <td class="table-entry"><%=val.price%></td>
-                <td class="table-entry"><%=val.interested.length%>
+                <td class="table-entry"><%=val.interested.length%>&nbsp;&nbsp;&nbsp;
                   <label class="checkbox">
                     <input type="hidden" name="<%='interested[' + i + ']'%>" value="_">
                     <input type="checkbox" name="<%='interested[' + i + ']'%>">
                   </label>
                 </td>
-                <td class="table-entry"><%=val.visited.length%>
+                <td class="table-entry"><%=val.visited.length%>&nbsp;&nbsp;&nbsp;
                   <label class="checkbox">
                     <input type="hidden" name="<%='visited[' + i + ']'%>" value="_">
                     <input type="checkbox" name="<%='visited[' + i + ']'%>">
@@ -130,7 +164,7 @@
            <% }} %>
           </table>
           <div class="field is-grouped">
-            <div class="control">
+            <div class="control" style="margin: 0 auto; margin-bottom: 2.5rem;">
               <button class="button is-link">Update preferences</button>
             </div>
           </div>

@@ -1,8 +1,7 @@
 const mongoose = require('mongoose')
 
 // Connect to mongodb
-mongoose.connect('mongodb://localhost:27017/travelblog', { useNewUrlParser: true }, () => {
-})
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/travelblog')
 const traveler = mongoose.connection
 traveler.on('error', 
   console.error.bind(console, 'connection error:')

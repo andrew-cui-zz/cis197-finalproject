@@ -57,6 +57,23 @@ module.exports = (path) => {
     }
   })
 
+  router.get('/create', (req, res) => {
+    // don't let a non-logged in user view
+    if (!req.session.user || req.session.user.length === 0) {
+      // need an error msg
+      req.flash('message', 'Please log in first!')
+      req.flash('validate', null)
+      res.redirect('/')
+    } else {
+      req.flash('user', req.session.user)
+      res.render('create.ejs', {
+        user: req.flash('user'),
+        message: req.flash('message'),
+        validate: req.flash('validate')
+      })
+    }
+  })
+
   // if none of the previous routes work, return index.html
   router.get('*', (req, res) => {
     res.redirect('/')

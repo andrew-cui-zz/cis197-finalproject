@@ -44,7 +44,7 @@
   width: 100%;
   height: 180px;
   object-fit: cover;
-  background-size: cover;
+  background-size: cover !important;
   background-position: 50% 50% !important;
   border: 1px solid rgba(50,50,50,.25);
   border-radius: 5px;
@@ -64,7 +64,37 @@
   font-weight: bold;
   text-align: center;
 }
-
+.entries {
+  display: flex;
+  flex-flow: row wrap;
+}
+@media only screen and (min-width: 0) {
+  .entry-data {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .entry-data {
+    width: 50%;
+  }
+}
+@media only screen and (min-width: 800px) {
+  .entry-data {
+    width: 33%;
+  }
+}
+@media only screen and (min-width: 1000px) {
+  .entry-data {
+    width: 25%;
+  }
+}
+.discover-entry {
+  transition: all .5s ease-in-out;
+}
+.entry-data:hover, .discover-entry:hover {
+  transform: scale(1.05);
+  transition: all .5s ease-in-out;
+}
 .hero-body .title, 
 .hero-body .subtitle {
   color: white;

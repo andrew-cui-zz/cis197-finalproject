@@ -51,19 +51,6 @@ module.exports = (db) => {
       }
     })
   })
-
-  // get all trips
-  router.get('/all', (req, res) => {
-    db.getAllTrips((data, err) => {
-      if (!err) {
-        res.json(data)
-      } else {
-        req.flash('message', 'Error: ' + err) 
-        req.flash('validate', null)
-        res.redirect('/')
-      }
-    })
-  })
   
   // get trip by id
   // need better route otherwise it catches everything
@@ -138,27 +125,36 @@ module.exports = (db) => {
 
   // add a trip ID
   router.post('/create', (req, res) => {
+    const { location, img, keywordList } = req.body
+    let keywords = keywordList.split(',')
+
     db.getNumTrips((count, err) => {
       if (!err) {
         // add to trip using req.body JSON + next ID
         db.addTrip(
           count + 1,
-          req.body.location,
-          req.body.img,
-          req.body.places,
-          req.body.keywords,
+          location,
+          img,
+          [],
+          keywords,
           req.session.user,
           (data, err) => {
-            if (!err) { 
-              res.json(data)
+            if (!err) {
+              req.flash('message', null)
+              req.flash('validate', 'Added ' + location + '!')
+              res.redirect('/create')
             } else {
               // find some way to render the data
-              res.send('CREATE ERROR: ' + err)
+              req.flash('message', 'Error: ' + err)
+              req.flash('validate', null)
+              res.redirect('/create')
             }
           }
         )
       } else {
-        res.send('DB ERROR: ' + err)
+        req.flash('message', 'Error: ' + err)
+        req.flash('validate', null)
+        res.redirect('/create')
       }
     })
   })
@@ -221,5 +217,35 @@ module.exports = (db) => {
     })
   })
 
+  // view all location
+  router.get('/all', (req, res) => {
+    // don't let a non-logged in user view
+    if (!req.session.user || req.session.user.length === 0) {
+      // need an error msg
+      req.flash('message', 'Please log in first!')
+      req.flash('validate', null)
+      res.redirect('/')
+    } else {
+      db.getAllTrips((data, err) => {
+        if (!err) {
+          req.flash('user', req.session.user)
+          req.flash('data', data)
+          res.render('list.ejs', {
+            user: req.flash('user'),
+            data: req.flash('data'),
+            message: req.flash('message'),
+            validate: req.flash('validate')
+          })
+        } else {
+          req.flash('message', 'Error: ' + err) 
+          req.flash('validate', null)
+          res.redirect('/')
+        }
+      })
+    }
+  })
+
+
+  
   return router
 }

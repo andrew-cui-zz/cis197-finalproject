@@ -1,5 +1,4 @@
 // api for database
-const user = require('./models/user.js')
 const trip = require('./models/trip.js')
 const travelFunctions = require('./models/functions/travelFunctions.js')
 

@@ -42,6 +42,22 @@ module.exports = (path) => {
     })
   })
 
+  router.get('/search', (req, res) => {
+    if (!req.session.user || req.session.user.length === 0) {
+      // need an error msg
+      req.flash('message', 'Please log in first!')
+      res.redirect('/')
+    } else {
+      req.flash('user', req.session.user)
+      res.render('search.ejs', {
+        user: req.flash('user'),
+        message: req.flash('message'),
+        query: req.flash('query'),
+        data: req.flash('data')
+      })
+    }
+  })
+
   router.get('/view', (req, res) => {
     // don't let a non-logged in user view
     if (!req.session.user || req.session.user.length === 0) {

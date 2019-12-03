@@ -41,6 +41,25 @@ form .button {
   font-weight: 300;
   font-size: 10pt;
 }
+/* tooltips */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+.tooltiptext {
+  display: none;
+  background-color: white;
+  padding: 0 1rem;
+  position: absolute;
+  z-index: 2;
+}
+.tooltip:hover {
+  cursor: pointer;
+}
+.tooltip:hover .tooltiptext {
+  display: inline-block;
+}
+
 /* footer - check position */
 .footer {
   position: relative;

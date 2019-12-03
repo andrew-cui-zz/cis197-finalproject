@@ -1,8 +1,50 @@
 const router = require('express').Router()
+const Fuse = require('fuse.js')
 
 // db parameter allows router to have access to database from api.js
 module.exports = (db) => {
-  // should we include search?
+  // search
+  router.post('/search', (req, res) => {
+    const query = req.body.searchQuery
+
+    const options = {
+      shouldSort: true,
+      threshold: 0.25,
+      location: 0,
+      distance: 100,
+      maxPatternLength: 32,
+      minMatchCharLength: 1,
+      keys: [
+        "location",
+        "keywords",
+        "places.category",
+        "places.name",
+        "places.interested",
+        "places.visited"
+      ]
+    }
+ 
+    db.getAllTrips((data, err) => {
+      if (!err) {
+        const fuse = new Fuse(data, options) // "list" is the item array
+        const result = fuse.search(query)
+        req.flash('query', query)
+        req.flash('message', null)
+
+        if (result.length === 0) {
+          req.flash('data', null)
+        } else {
+          req.flash('data', result)
+        }
+        res.redirect('/search')
+      } else {
+        req.flash('message', 'Search error: ' + err) 
+        req.flash('query', query)
+        req.flash('data', null)
+        res.redirect('/search')
+      }
+    })
+  })
 
   // get number of trips - used in creation
   router.get('/count', (req, res) => {
@@ -244,8 +286,6 @@ module.exports = (db) => {
       })
     }
   })
-
-
   
   return router
 }

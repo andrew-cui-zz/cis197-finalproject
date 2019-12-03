@@ -188,3 +188,9 @@ table, th, td {
 form .label, form > input {
   font-size: 10pt;
 }
+.search-input, .search-control {
+  width: 40vw !important;  
+}
+.search-button {
+  height: 40px !important;
+}
